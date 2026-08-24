@@ -24,15 +24,25 @@ jobs:
       - name: install (must resolve ZERO third-party dependencies)
         shell: bash
         run: |
-          python -m pip install -q .
-          python -m pip freeze --exclude-editable | grep -vi '^campanile' \
+          # a fresh venv, or the assertion measures the runner image's
+          # preinstalled site-packages instead of what WE resolve
+          # (macOS/Windows runners ship pipx and friends; ubuntu's is
+          # bare, which is how this bug hid in one OS's cells)
+          python -m venv v
+          PY=v/bin/python; [ -f v/Scripts/python.exe ] && PY=v/Scripts/python.exe
+          echo "PY=$PY" >> "$GITHUB_ENV"
+          "$PY" -m pip install -q .
+          "$PY" -m pip freeze --exclude-editable | grep -vi '^campanile' \
             | grep . && { echo 'DEPENDENCY CREPT INTO THE CORE'; exit 1; } || true
       - name: install pytest (after the zero-dep assertion, deliberately)
-        run: python -m pip install -q pytest
+        shell: bash
+        run: '"$PY" -m pip install -q pytest'
       - name: offline test suite (sockets blocked by conftest)
-        run: python -m pytest tests/ -q
+        shell: bash
+        run: '"$PY" -m pytest tests/ -q'
       - name: the flagship, as a stranger runs it
-        run: python -m campanile replay xz
+        shell: bash
+        run: '"$PY" -m campanile replay xz'
 
   verify-extra:
     runs-on: ubuntu-latest
