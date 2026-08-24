@@ -12,11 +12,15 @@ uvx campanile replay xz
 
 In the xz repository (CVE-2024-3094), custody of the tests file class inverted at first-parent chain index 1746 — 2023-03-13 — while overall custody never inverted. The payload that later shipped was carried in that same file class. This tool dates the structural shift; it makes no claim about intent, identity, or wrongdoing.
 
-Calibration: in a 55-repo fleet of living projects, class-level custody inversions are ordinary (46 of 55 repos have them). Any class inverting while overall custody never does: 2 of 55. The tests class specifically — the xz signature — 0 of 55.
+Calibration (2026Q3, the first 55-repo fleet): class-level custody inversions are ordinary (46 of 55 repos have them). Any class inverting while overall custody never does: 2 of 55. The tests class specifically — the xz signature — 0 of 55. The wider fleet below measures the same signature at production scale; a rate always travels with its denominator and its epoch.
 
 ## Base rates
 
-Measured on a sealed 406-repo top-PyPI fleet, predictions staked before cloning: the bare xz shape in ANY file class — one class changes hands while the project overall never does — appears in 64 of 406 healthy repositories. With a 150-day recent-arrival condition on the ascending author, 36 of 406. Restricted to the tests class — the class that carried the xz payload — 17 of 406, about 1 in 24. At these rates the pattern alone accuses the innocent; that is the measurement, and it is why a match is a question, never a finding.
+Measured on the sealed 406-repo top-PyPI fleet (2026Q4-wide), predictions staked before cloning. Three predicates, three separate questions. The bare xz shape in ANY file class — one class changes hands while the project overall never does: 64 of 406 healthy repositories. The same any-class shape with a 150-day recent-arrival condition on the ascending author: 36 of 406. The tests-class signature — the class that carried the xz payload, with no recent-arrival condition: 17 of 406, about 1 in 24. The earlier 55-repo calibration above measured this same tests-class signature at 0 of 55: a small fleet's zero and a wide fleet's 1-in-24 are the same physics at different denominators, and both publish. At these rates the pattern alone accuses the innocent; that is the measurement, and it is why a match is a question, never a finding.
+
+## The sealed October envelope
+
+Predictions for the next quarterly sweep over the same fleet are already sealed: claims sha256 851d268b69b9e89ecaa1ebdd2c4d88e2720328e9469044db4a4e320d013c5fee, RFC 3161-witnessed 2026-08-24, unsealed October 2026. Whatever unseals either matches this hash or it does not; nobody — this project included — can edit it.
 
 Verification is offline. The shipped xz fixture replays 3,054 commits with no network, no clone, and no model. `--from-clone PATH` recomputes the same result from a live
 git clone at the pinned commit and refuses any other commit — proving the
@@ -40,7 +44,7 @@ Every scan ends with the agent-held custody readout: the share of surviving line
 
 ## If someone files campanile output against your project
 
-A campanile match is a structural measurement with a published base rate, never evidence of wrongdoing. The same shape appears in healthy, famous projects at the rates above; the usual cause is ordinary succession — someone takes over the tests while the founder keeps the whole. Reports speak in roles, and per-repo fleet results are never published: the only person who can show a repository's custody story is its maintainer. If this section was linked at you, the number being cited asks a question about succession; it does not answer one about intent.
+A campanile match is a structural measurement with a published base rate, never evidence of wrongdoing. The same shape appears in healthy, famous projects at the rates above; the usual cause is ordinary succession — someone takes over the tests while the founder keeps the whole. Reports speak in roles, and this project never publishes a named per-repository result — aggregates and sealed receipts only; whether a repository tells its own custody story is its maintainer's choice. If this section was linked at you, the number being cited asks a question about succession; it does not answer one about intent.
 
 ## Verify
 

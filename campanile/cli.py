@@ -68,7 +68,8 @@ def cmd_replay(args) -> int:
         from campanile.xz_constants import XZ_PIN
         live = _xz_measure(lambda cb: replay(args.from_clone, XZ_PIN, cb))
         clone_ok = live == got
-    print(L.render_replay_report(got, expected, ok, clone_ok), end="")
+    print(L.render_replay_report(got, expected, ok, clone_ok,
+                                 personas=args.personas), end="")
     return 0 if ok and clone_ok is not False else 1
 
 
@@ -84,7 +85,7 @@ def cmd_scan(args) -> int:
                          ).stdout.decode().strip()
     result = run_custody(str(repo), pin, GENERIC_CLASSES, classify_generic)
     vec = build_vector(repo.name, result, GENERIC_CLASSES)
-    hits = scan_bytes(json.dumps(vec).encode())
+    hits = scan_bytes(json.dumps(_fence_view(vec)).encode())
     if hits:
         print(f"FENCE RED: output contains {hits} — refusing to emit",
               file=sys.stderr)
@@ -96,6 +97,27 @@ def cmd_scan(args) -> int:
     print(L.render_scan_report(vec, personas=args.personas), end="")
     print(L.render_agent_report(_agent_shares(repo, result)), end="")
     return 0
+
+
+def _fence_view(vec: dict) -> dict:
+    """The fence polices THIS TOOL'S vocabulary, not the scanned
+    repository's. Repo-supplied strings (repo name, recorded author
+    strings) are data, not our speech — an innocent repository named
+    for the very thing it defends against must not brick its own
+    report — so they are replaced with role placeholders before the
+    scan; everything the tool itself says is scanned verbatim."""
+    view = json.loads(json.dumps(vec))
+    view["repo"] = "(repo)"
+    p = view.get("principals")
+    if p:
+        shares = p.get("peak_share_e6", {})
+        p["peak_share_e6"] = {
+            "(descending)": shares.get(p.get("incumbent")),
+            "(ascending)": shares.get(p.get("challenger")),
+        }
+        p["incumbent"] = "(descending)"
+        p["challenger"] = "(ascending)"
+    return view
 
 
 def _agent_shares(repo: Path, result: dict) -> dict:
@@ -190,6 +212,8 @@ def main(argv=None) -> int:
     p.add_argument("case")
     p.add_argument("--from-clone", metavar="PATH",
                    help="also recompute from a live git clone at the pin")
+    p.add_argument("--personas", action="store_true",
+                   help="print recorded author strings instead of roles")
     p.set_defaults(fn=cmd_replay)
     p = sub.add_parser("scan", help="custody vector of a local repository")
     p.add_argument("path", nargs="?", default=".")
