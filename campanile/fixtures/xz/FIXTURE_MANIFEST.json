@@ -1,0 +1,10 @@
+{
+ "frozen_replay_sha256": "10d23be9a6bf33fe9a860f52dfa60ad946cc7cb33fb7d2c0ea039b7b56ad1d3d",
+ "git_format": "log --first-parent --reverse -p -M --unified=0 --no-color --no-ext-diff",
+ "gz_sha256": "ae82f407e5819a9542e622f501defa22aa3a28100da91caa2b06547400cdf263",
+ "n_lines_stream": 527806,
+ "n_lines_structural": 83868,
+ "pin": "c8b8ab2ef1eb0a0217ad2027d7f5d242ceb944d3",
+ "schema": "campanile-fixture/v1",
+ "structural_sha256": "9f985f39fd032a625735eb49951e226e522f1d9b238c75df6761e51e2c87e92b"
+}

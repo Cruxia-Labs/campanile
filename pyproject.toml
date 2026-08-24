@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "campanile"
+version = "1.0.0"
+description = "Replay a repository's git history offline and report its line-custody structure — which author strings held which file classes, and when that shifted."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Mars Ausili", email = "mars@cruxia.ai"},
+]
+keywords = ["git", "custody", "provenance", "supply-chain", "forensics"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Version Control :: Git",
+]
+# THE CORE IS DEPENDENCY-FREE — pure stdlib plus the git binary. Receipt
+# minting/verification (Ed25519) lives behind the extra, deliberately.
+dependencies = []
+
+[project.optional-dependencies]
+verify = ["cryptography>=41"]
+
+[project.scripts]
+campanile = "campanile.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Cruxia-Labs"
+
+[tool.hatch.build]
+exclude = ["**/__pycache__", "**/*.pyc"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["campanile"]
+
+# ONLY these enter the sdist (pyproject.toml + PKG-INFO are implicit, and
+# hatchling always bundles a .gitignore — the local benign one). The sdist is
+# the auditable form: fixtures + the full test suite, so `pip download
+# campanile --no-binary :all:` reproduces every claimed number offline.
+[tool.hatch.build.targets.sdist]
+only-include = ["campanile", "tests", "README.md", "DISCLOSURE.md", "LICENSE", "COUNTS.json"]

@@ -1,0 +1,11 @@
+{
+ "disclosure_chain_index": 2315,
+ "fixture_gz_sha256": "ae82f407e5819a9542e622f501defa22aa3a28100da91caa2b06547400cdf263",
+ "fixture_structural_sha256": "9f985f39fd032a625735eb49951e226e522f1d9b238c75df6761e51e2c87e92b",
+ "inversion_overall": null,
+ "n_commits": 3054,
+ "n_lines_structural": 83868,
+ "pin": "c8b8ab2ef1eb0a0217ad2027d7f5d242ceb944d3",
+ "tests_inversion_date": "2023-03-13",
+ "tests_inversion_index": 1746
+}

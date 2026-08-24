@@ -1,0 +1,24 @@
+{
+ "disclosure_chain_index": 2315,
+ "m3": {
+  "inversion_by_class": {
+   "build": null,
+   "docs": null,
+   "other": null,
+   "source": null,
+   "tests": 1746,
+   "translations": 2277
+  },
+  "inversion_overall": null,
+  "principals": {
+   "challenger": "Jia Tan",
+   "incumbent": "Lasse Collin",
+   "peak_share_e6": {
+    "Jia Tan": 308282,
+    "Lasse Collin": 1000000
+   }
+  }
+ },
+ "n_commits": 3054,
+ "pin": "c8b8ab2ef1eb0a0217ad2027d7f5d242ceb944d3"
+}
